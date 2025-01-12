@@ -10,6 +10,7 @@ import chainlit as cl
 import ollama
 import os
 
+env_model=os.getenv("MODEL")
 
 def setup_runnable():
     memory = cl.user_session.get("memory")  # type: ConversationBufferMemory
@@ -62,7 +63,7 @@ async def tool(input_massage):
 
     interaction.append({"role" : "user", "content": input_massage})
 
-    response = ollama.chat(model="llama3.2", messages=interaction)
+    response = ollama.chat(model=f"{env_model}", messages=interaction)
 
     interaction.append({"role" : "user", "content": response.message.content})
 
