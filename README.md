@@ -28,6 +28,24 @@ source .venv/bin/activate
 uv sync
 ```
 
+- Enter values in .env file :
+```bash
+cp .env.example .env
+
+# Open .env file and enter values
+# Generate Secret Key Chainlit
+
+chainlit create-secret
+
+# Enter the secret key in .env file
+
+# Example .env file
+CHAINLIT_AUTH_SECRET="secret_key"
+USERNAME="user"
+PASSWORD="password"
+```
+
+
 - Run the chatbot :
 ```bash
 chainlit run main.py
