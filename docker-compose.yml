@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:16
+    volumes:
+      - ./.data/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-root}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-root}
+      - POSTGRES_DB=${POSTGRES_DB:-postgres}
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - ${APP_PORT:-8000}:80
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    command: uvicorn app:app --host 0.0.0.0 --port 80

@@ -5,12 +5,14 @@
 - python 3.10 or newer
 - uv newer
 - ollama
+- npx --lts
 
 ## Installation
 
 - Install python 3.10 or newer (https://www.python.org/downloads/)
 - Install uv (https://docs.astral.sh/uv/)
 - Install ollama (https://ollama.com)
+- Install nvm/node --lts (https://github.com/nvm-sh/nvm)
 
 ## Usage
 
@@ -43,8 +45,18 @@ chainlit create-secret
 CHAINLIT_AUTH_SECRET="secret_key"
 USERNAME="user"
 PASSWORD="password"
+DATBASE_URL=""
 ```
 
+- Run Postgres database :
+```bash
+docker compose up -d postgres
+```
+
+- Migrate the database :
+```bash
+npx prisma migrate deploy
+```
 
 - Run the chatbot :
 ```bash

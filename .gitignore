@@ -11,3 +11,4 @@ wheels/
 .ropeproject
 .python-version
 .env
+.data
