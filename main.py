@@ -1,10 +1,7 @@
 from operator import itemgetter
-
-
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import  RunnablePassthrough, RunnableLambda
 from langchain.memory import ConversationBufferMemory
-
 from chainlit.types import ThreadDict
 import chainlit as cl
 import ollama
@@ -65,7 +62,7 @@ async def tool(input_massage):
 
     response = ollama.chat(model=f"{env_model}", messages=interaction)
 
-    interaction.append({"role" : "user", "content": response.message.content})
+    interaction.append({"role" : "assistant", "content": response.message.content})
 
     return response
 
@@ -82,6 +79,7 @@ async def on_chat_resume(thread: ThreadDict):
     cl.user_session.set("memory", memory)
 
     setup_runnable()
+
 @cl.on_message
 async def main(message: cl.message):
 
